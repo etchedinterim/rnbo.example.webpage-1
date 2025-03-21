@@ -295,15 +295,34 @@ function makeMIDIKeyboard(device) {
         mdiv.removeChild(noMidiLabel);
     }
 
-    const midiNotes = [49, 52, 56, 63];
+    // Updated MIDI notes for an octave + semitone, starting at 48 (C3)
+    const midiNotes = [48, 50, 52, 53, 55, 57, 59, 60];
     const keyElements = []; // Store the created key elements
     const keysPressed = new Set(); // Keep track of pressed keys
 
-    midiNotes.forEach(note => {
+     midiNotes.forEach((note, index) => { // Added index
         const key = document.createElement("div");
         const label = document.createElement("p");
         label.textContent = note;
         key.appendChild(label);
+
+        // Apply black key styling
+        if (index === 1 || index === 3 || index === 6) {
+            key.style.backgroundColor = '#000';
+            key.style.width = '24px';
+            key.style.height = '80px';
+            key.style.marginLeft = '-12px';
+            key.style.marginRight = '-12px';
+            key.style.zIndex = '1';
+            key.style.borderRadius = '3px';
+         }
+         else{
+            key.style.backgroundColor = '#fff';
+            key.style.width = '40px';
+            key.style.height = '120px';
+            key.style.border = '1px solid #000';
+            key.style.borderRadius = '5px';
+         }
 
         const playNote = () => { // Extract note playing logic into a function
             let midiChannel = 0;
