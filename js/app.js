@@ -289,51 +289,95 @@ function makeMIDIKeyboard(device) {
     let mdiv = document.getElementById("rnbo-clickable-keyboard");
     if (device.numMIDIInputPorts === 0) return;
 
-    mdiv.removeChild(document.getElementById("no-midi-label"));
+    // Clear the "No MIDI Input" label
+    const noMidiLabel = document.getElementById("no-midi-label");
+    if (noMidiLabel) {
+        mdiv.removeChild(noMidiLabel);
+    }
 
     const midiNotes = [49, 52, 56, 63];
+    const keyElements = []; // Store the created key elements
+
     midiNotes.forEach(note => {
         const key = document.createElement("div");
         const label = document.createElement("p");
         label.textContent = note;
         key.appendChild(label);
-        key.addEventListener("pointerdown", () => {
+
+        const playNote = () => { // Extract note playing logic into a function
             let midiChannel = 0;
 
-            // Format a MIDI message paylaod, this constructs a MIDI on event
+            // Format a MIDI message payload, this constructs a MIDI on event
             let noteOnMessage = [
                 144 + midiChannel, // Code for a note on: 10010000 & midi channel (0-15)
                 note, // MIDI Note
                 100 // MIDI Velocity
             ];
-        
+
             let noteOffMessage = [
                 128 + midiChannel, // Code for a note off: 10000000 & midi channel (0-15)
                 note, // MIDI Note
                 0 // MIDI Velocity
             ];
-        
+
             // Including rnbo.min.js (or the unminified rnbo.js) will add the RNBO object
             // to the global namespace. This includes the TimeNow constant as well as
             // the MIDIEvent constructor.
             let midiPort = 0;
             let noteDurationMs = 250;
-        
+
             // When scheduling an event to occur in the future, use the current audio context time
             // multiplied by 1000 (converting seconds to milliseconds) for now.
             let noteOnEvent = new RNBO.MIDIEvent(device.context.currentTime * 1000, midiPort, noteOnMessage);
             let noteOffEvent = new RNBO.MIDIEvent(device.context.currentTime * 1000 + noteDurationMs, midiPort, noteOffMessage);
-        
+
             device.scheduleEvent(noteOnEvent);
             device.scheduleEvent(noteOffEvent);
 
-            key.classList.add("clicked");
-        });
+            key.classList.add("clicked"); // Apply 'clicked' class
+            setTimeout(() => key.classList.remove("clicked"), noteDurationMs); // Remove after duration
+        };
 
+        key.addEventListener("pointerdown", playNote);
         key.addEventListener("pointerup", () => key.classList.remove("clicked"));
 
         mdiv.appendChild(key);
+        keyElements.push(key); // Store the key element
     });
+
+    // Add keyboard event listeners for 'a' and 'w'
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "a") {
+            playNoteAtIndex(0); // Play the first note
+        } else if (event.key === "w") {
+            playNoteAtIndex(1); // Play the second note
+        }
+    });
+
+    function playNoteAtIndex(index) {
+        if (index >= 0 && index < midiNotes.length) {
+            // Simulate a click on the corresponding key element
+            const keyElement = keyElements[index];
+             if (keyElement) {
+                // Dispatch a pointerdown event
+                keyElement.dispatchEvent(new PointerEvent('pointerdown', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                }));
+
+                // Remove the clicked class after the note duration
+                setTimeout(() => {
+                    keyElement.dispatchEvent(new PointerEvent('pointerup', {
+                        bubbles: true,
+                        cancelable: true,
+                        view: window
+                    }));
+                }, 250); // 250ms matches noteDurationMs
+            }
+        }
+    }
 }
+
 
 setup();
