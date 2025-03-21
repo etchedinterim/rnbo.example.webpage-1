@@ -297,6 +297,7 @@ function makeMIDIKeyboard(device) {
 
     const midiNotes = [49, 52, 56, 63];
     const keyElements = []; // Store the created key elements
+    const keysPressed = new Set(); // Keep track of pressed keys
 
     midiNotes.forEach(note => {
         const key = document.createElement("div");
@@ -348,9 +349,23 @@ function makeMIDIKeyboard(device) {
     // Add keyboard event listeners for 'a' and 'w'
     document.addEventListener("keydown", (event) => {
         if (event.key === "a") {
-            playNoteAtIndex(0); // Play the first note
+            if (!keysPressed.has("a")) { // Check if 'a' is already pressed
+                keysPressed.add("a");     // Add 'a' to the set
+                playNoteAtIndex(0); // Play the first note
+            }
         } else if (event.key === "w") {
-            playNoteAtIndex(1); // Play the second note
+            if (!keysPressed.has("w")) { // Check if 'w' is already pressed
+                keysPressed.add("w");     // Add 'w' to the set
+                playNoteAtIndex(1); // Play the second note
+            }
+        }
+    });
+
+    document.addEventListener("keyup", (event) => {
+        if (event.key === "a") {
+            keysPressed.delete("a"); // Remove 'a' from the set when released
+        } else if (event.key === "w") {
+            keysPressed.delete("w"); // Remove 'w' from the set when released
         }
     });
 
@@ -378,6 +393,7 @@ function makeMIDIKeyboard(device) {
         }
     }
 }
+
 
 
 setup();
