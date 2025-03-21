@@ -296,7 +296,7 @@ function makeMIDIKeyboard(device) {
     }
 
     // Updated MIDI notes for an octave + semitone, starting at 48 (C3)
-    const midiNotes = [48, 50, 52, 53, 55, 57, 59, 60];
+    const midiNotes = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60];
     const keyElements = []; // Store the created key elements
     const keysPressed = new Set(); // Keep track of pressed keys
 
