@@ -108,6 +108,31 @@ h2, em {
     margin-right: -12px;
     z-index: 1;
     border-radius: 3px;
+    position: absolute; /* Position absolutely */
+}
+#rnbo-clickable-keyboard div:nth-child(1) {
+    left: 0;
+}
+#rnbo-clickable-keyboard div:nth-child(2) {
+    left: 28px;
+}
+#rnbo-clickable-keyboard div:nth-child(3) {
+    left: 40px;
+}
+#rnbo-clickable-keyboard div:nth-child(4) {
+    left: 68px;
+}
+#rnbo-clickable-keyboard div:nth-child(5) {
+    left: 80px;
+}
+#rnbo-clickable-keyboard div:nth-child(6) {
+    left: 120px;
+}
+#rnbo-clickable-keyboard div:nth-child(7) {
+    left: 148px;
+}
+#rnbo-clickable-keyboard div:nth-child(8) {
+    left: 160px;
 }
 
 #rnbo-clickable-keyboard div.clicked {
