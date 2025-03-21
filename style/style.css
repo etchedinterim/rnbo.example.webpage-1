@@ -19,27 +19,7 @@ h2, em {
     margin: auto;
     max-width: 540px;
 }
-/*
-#rnbo-clickable-keyboard {
-    display: flex;
-    flex-wrap: wrap;
-}
 
-#rnbo-clickable-keyboard > div {
-    margin: 2px;
-    border: solid black 1px;
-    min-height: 50px;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#rnbo-clickable-keyboard > div.clicked {
-    background: #222222;
-    color: #dddddd;
-}
-*/
 #rnbo-parameter-sliders {
     display: flex;
     flex-direction: column;
@@ -57,11 +37,12 @@ h2, em {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #eee;
+    padding: 0; /* Removed padding */
+    border: none; /* Removed border */
+    border-radius: 0; /* Removed border-radius */
+    background-color: transparent; /* Made background transparent */
     overflow-x: auto; /* Make it scrollable if needed */
+    margin-top: 20px; /* Added margin to move it down from the title */
 }
 
 #rnbo-clickable-keyboard div {
