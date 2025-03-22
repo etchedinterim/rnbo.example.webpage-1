@@ -20,6 +20,26 @@ h2, em {
     max-width: 540px;
 }
 
+#rnbo-clickable-keyboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#rnbo-clickable-keyboard > div {
+    margin: 2px;
+    border: solid black 1px;
+    min-height: 50px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#rnbo-clickable-keyboard > div.clicked {
+    background: #222222;
+    color: #dddddd;
+}
+
 #rnbo-parameter-sliders {
     display: flex;
     flex-direction: column;
@@ -31,121 +51,4 @@ h2, em {
 
 #rnbo-parameter-sliders > div > input:first-of-type {
     flex-grow: 1;
-}
-
-#rnbo-clickable-keyboard {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    padding: 0; /* Removed padding */
-    border: none; /* Removed border */
-    border-radius: 0; /* Removed border-radius */
-    background-color: transparent; /* Made background transparent */
-    overflow-x: auto; /* Make it scrollable if needed */
-    margin-top: 20px; /* Added margin to move it down from the title */
-    position: relative; /* Add relative positioning */
-    height: 150px; /* Add a height to contain the absolute positioned keys */
-}
-
-#rnbo-clickable-keyboard div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 2px;
-    padding: 0;
-    font-size: 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    user-select: none;
-}
-
-#rnbo-clickable-keyboard div p {
-    margin: 0 0 5px 0;
-    color: #fff;
-    font-size: 10px;
-    text-shadow: 1px 1px 0 #000;
-}
-
-/* White Keys */
-#rnbo-clickable-keyboard div:nth-child(1),
-#rnbo-clickable-keyboard div:nth-child(3),
-#rnbo-clickable-keyboard div:nth-child(5),
-#rnbo-clickable-keyboard div:nth-child(6),
-#rnbo-clickable-keyboard div:nth-child(8),
-#rnbo-clickable-keyboard div:nth-child(10),
-#rnbo-clickable-keyboard div:nth-child(12) {
-    background-color: #fff;
-    width: 40px;
-    height: 120px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    position: absolute;
-    top: 0;
-}
-
-/* Black Keys */
-#rnbo-clickable-keyboard div:nth-child(2),
-#rnbo-clickable-keyboard div:nth-child(4),
-#rnbo-clickable-keyboard div:nth-child(7),
-#rnbo-clickable-keyboard div:nth-child(9),
-#rnbo-clickable-keyboard div:nth-child(11),
-#rnbo-clickable-keyboard div:nth-child(13) {  /* Added rule for 13th child */
-    background-color: #000;
-    width: 24px;
-    height: 80px;
-    margin-left: -12px;
-    margin-right: -12px;
-    z-index: 1;
-    border-radius: 3px;
-    position: absolute; /* Position absolutely */
-    top: 0;
-}
-#rnbo-clickable-keyboard div:nth-child(1) {
-    left: 0;
-}
-#rnbo-clickable-keyboard div:nth-child(2) {
-    left: 28px;
-}
-#rnbo-clickable-keyboard div:nth-child(3) {
-    left: 40px;
-}
-#rnbo-clickable-keyboard div:nth-child(4) {
-    left: 68px;
-}
-#rnbo-clickable-keyboard div:nth-child(5) {
-    left: 80px;
-}
-#rnbo-clickable-keyboard div:nth-child(6) {
-    left: 120px;
-}
-#rnbo-clickable-keyboard div:nth-child(7) {
-    left: 148px;
-}
-#rnbo-clickable-keyboard div:nth-child(8) {
-    left: 160px;
-}
-#rnbo-clickable-keyboard div:nth-child(9) {
-    left: 188px;
-}
-#rnbo-clickable-keyboard div:nth-child(10) {
-    left: 200px;
-}
-#rnbo-clickable-keyboard div:nth-child(11) {
-    left: 228px;
-}
-#rnbo-clickable-keyboard div:nth-child(12) {
-    left: 240px;
-}
-#rnbo-clickable-keyboard div:nth-child(13) { /* Position the 13th child */
-    left: 268px;
-}
-
-#rnbo-clickable-keyboard div.clicked {
-    background-color: #0066b3;
-}
-
-#no-midi-label {
-    font-size: 16px;
-    color: #555;
 }
